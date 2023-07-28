@@ -1,0 +1,80 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
+
+    public static void main(String[] args) throws IOException {
+      HashMap<String, Boolean> hello = new HashMap <String, Boolean>();
+      hello.put("1", false);
+      hello.put("2",false);
+      hello.put("3",false);
+      hello.put("4", false);
+      hello.put("5", false);
+      hello.put("6", false);
+      hello.put("7", false);
+      hello.put("8", false);
+      hello.put("9", false);
+      hello.put("0", false);
+      String uinput = readLine();
+      String[] arr = uinput.split("");
+      boolean thing = false;
+      boolean end = false;
+      for (int i = 0; i < arr.length; i++) {
+        while (hello.containsKey(arr[i])) {
+          System.out.print(arr[i]);
+          i++;
+          if (i == arr.length) {
+            end = true;
+            break;
+          }
+        }
+        if (end == true) {
+          break;
+        }
+        if (thing == true) {
+          System.out.print("\n");
+          thing = false;
+        }
+
+        if (!arr[i].equals("+") && !arr[i].equals("-")) {
+          System.out.print(arr[i]);
+        } else if (arr[i].equals("+")) {
+          System.out.print(" tighten " + arr[i + 1]);
+          i++;
+          thing = true;
+        } else if (arr[i].equals("-")) {
+          System.out.print(" loosen " + arr[i + 1]);
+          i++;
+          thing = true;
+        }
+      }
+    }
+
+    static String next() throws IOException {
+        while (st == null || !st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine().trim());
+        return st.nextToken();
+    }
+
+    static long readLong() throws IOException {
+        return Long.parseLong(next());
+    }
+
+    static int readInt() throws IOException {
+        return Integer.parseInt(next());
+    }
+
+    static double readDouble() throws IOException {
+        return Double.parseDouble(next());
+    }
+
+    static char readCharacter() throws IOException {
+        return next().charAt(0);
+    }
+
+    static String readLine() throws IOException {
+        return br.readLine().trim();
+    }
+}
