@@ -1,0 +1,93 @@
+import java.util.*;
+import java.io.*;
+
+public class sudoku_challenge {
+    static boolean row[][], col[][], block[][];
+    static int puzzle[][];
+
+    public static void main(String[] args) throws IOException {
+        // TODO Auto-generated method stub
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(System.out);
+        StringTokenizer st;
+
+        row = new boolean[9][10];
+        col = new boolean[9][10];
+        block = new boolean[9][10];
+        puzzle = new int[9][9];
+
+        for (int i = 0; i < 9; i++) {
+            String input = br.readLine();
+            for (int j = 0; j < 9; j++) {
+                if (input.charAt(j) == '.') {
+                    puzzle[i][j] = 0;
+                } else {
+                    int realnum = input.charAt(j) - 48;
+                    puzzle[i][j] = realnum;
+                    row[i][realnum] = true;
+                    col[j][realnum] = true;
+                    block[(i / 3) * 3 + (j / 3)][realnum] = true;
+
+                }
+            }
+        }
+
+        sudoku(0, 0);
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                out.print(puzzle[i][j]);
+            }
+            out.println();
+        }
+        out.flush();
+
+    }
+
+    public static boolean sudoku(int r, int c) {
+        // end of puzzle
+        if (r == 9) {
+            return true;
+        }
+
+        if (puzzle[r][c] != 0) { // inputed number
+            if (c == 8) {
+                if (sudoku(r + 1, 0)) {
+                    return true;
+                }
+            } else {
+                if (sudoku(r, c + 1)) {
+                    return true;
+                }
+            }
+        } else {
+            for (int i = 1; i <= 9; i++) {
+                if (row[r][i] || col[c][i] || block[(r / 3) * 3 + (c / 3)][i]) {
+                } else {
+                    puzzle[r][c] = i;
+                    row[r][i] = true;
+                    col[c][i] = true;
+                    block[(r / 3) * 3 + (c / 3)][i] = true;
+
+                    if (c == 8) {
+                        if (sudoku(r + 1, 0)) {
+                            return true;
+                        }
+                    } else {
+                        if (sudoku(r, c + 1)) {
+                            return true;
+                        }
+                    }
+                    // backtrack
+                    puzzle[r][c] = 0;
+                    row[r][i] = false;
+                    col[c][i] = false;
+                    block[(r / 3) * 3 + (c / 3)][i] = false;
+
+                }
+            }
+        }
+        return false;
+    }
+
+}
