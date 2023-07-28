@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  static List<Integer> numbers = new ArrayList<Integer>();
+    public static void sumac() {
+      int term = numbers.get(numbers.size() - 1);
+      int Prevterm = numbers.get(numbers.size() - 2);
+      int newTerm = Prevterm - term;
+      numbers.add(newTerm);
+      if (newTerm > term) {
+        System.out.println(numbers.size());
+      }
+      else {
+        sumac();
+      }
+      
+    }
+    public static void main(String[] args) {
+      Scanner input = new Scanner(System.in);
+      int num1 = input.nextInt();
+      int num2 = input.nextInt();  
+      numbers.add(num1);
+      numbers.add(num2);
+      sumac();
+      
+
+    }
+        
+}
