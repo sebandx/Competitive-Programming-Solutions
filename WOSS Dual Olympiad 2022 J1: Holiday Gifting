@@ -1,0 +1,21 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+		int budget = input.nextInt();
+		int numCandyCanes = input.nextInt();
+		int numCoffeeMugs = input.nextInt();
+		int numUglySweaters = input.nextInt();
+		
+		int cost = numCandyCanes + numCoffeeMugs*4 + numUglySweaters*7;
+		
+		if (cost <= budget) {
+			System.out.println("Time to go shopping!");
+		}
+		else {
+			System.out.println("You cannot afford them all.");
+		}
+    }
+}
