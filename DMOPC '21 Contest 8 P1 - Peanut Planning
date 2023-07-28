@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int search(multiset<int>& stocks, int target) {
+  auto it = stocks.lower_bound(target);
+  if (it == stocks.end()) {
+    return -1;
+  } else {
+    return *it;
+  }
+}
+
+int main() {
+    int n; int m;
+    cin >> n >> m;
+    multiset<int> stocks;
+
+    for (int i = 0; i < n; i++) {
+      int stock;
+      cin >> stock;
+      stocks.insert(stock);
+    }
+
+    vector<int> arranged(n);
+    bool takeMin = true;
+    for (int i = 0; i < n; i++) {
+      if (takeMin) {
+        arranged[i] = *stocks.begin();
+        stocks.erase(stocks.begin());
+        takeMin = false;
+      } else {
+        int val = m - arranged[i - 1];
+        if (val <= 0) {
+          arranged[i] = *stocks.begin();
+          stocks.erase(stocks.begin());
+        } else {
+          int stock = search(stocks, val);
+          if (stock == -1) {
+            cout << -1;
+            exit(0);
+          }
+          arranged[i] = stock;
+          stocks.erase(stocks.find(stock));
+        }
+        takeMin = true;
+      }
+    }
+
+    for (int i = 0; i < n; i++) {
+      cout << arranged[i] << " ";
+    }
+
+    return 0;
+}
