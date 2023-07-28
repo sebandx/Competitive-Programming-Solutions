@@ -1,0 +1,46 @@
+import java.util.*;
+import java.io.*;
+public class CCC04S1 {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer st;
+	public static void main(String[] args) throws IOException {
+		int num = Integer.parseInt(br.readLine());
+		for (int i = 0; i < num; i++) {
+			String[] arr = new String[3];
+			for (int j = 0; j < 3; j++) {
+				arr[j] = br.readLine();
+			}
+			Arrays.sort(arr, Comparator.comparingInt(String::length));
+			String word1 = arr[0];
+			String word2 = arr[1];
+			String word3 = arr[2];
+			boolean fix = false;
+			
+			if (word2.substring(0, word1.length()).equals(word1)) {
+				fix = true;
+			}
+			else if (word3.substring(0, word1.length()).equals(word1)) {
+				fix = true;
+			}
+			else if (word2.substring(word2.length() - word1.length(), word2.length()).equals(word1)) {
+				fix = true;
+			}
+			else if (word3.substring(word3.length() - word1.length(), word3.length()).equals(word1)) {
+				fix = true;
+			}
+			else if (word3.substring(0, word2.length()).equals(word2)) {
+				fix = true;
+			}
+			else if (word3.substring(word3.length() - word2.length(), word3.length()).equals(word2)) {
+				fix = true;
+			}
+			
+			if (fix == true) {
+				System.out.println("No");
+			}
+			else {
+				System.out.println("Yes");
+			}
+		}
+	}
+}
