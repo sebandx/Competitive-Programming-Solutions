@@ -1,0 +1,42 @@
+import java.util.*;
+import java.io.*;
+public class CCC19S1 {
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader (System.in)); 
+		StringTokenizer st;
+		String flips = br.readLine();
+		
+		String[] arr = flips.split("");
+		
+		int numVs = 0;
+		int numHs = 0;
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i].equals("V")) {
+				numVs++;
+			}
+			else {
+				numHs++;
+			}
+		}
+		
+		if (numVs % 2 == 0 && numHs % 2 == 0) {
+			System.out.println("1 2");
+			System.out.println("3 4");
+		}
+		else if (numVs % 2 == 0 && numHs % 2 != 0) {
+			System.out.println("3 4");
+			System.out.println("1 2");
+		}
+		else if (numVs % 2 != 0 && numHs % 2 == 0) {
+			System.out.println("2 1");
+			System.out.println("4 3");
+		}
+		else {
+			System.out.println("4 3");
+			System.out.println("2 1");
+		}
+
+	}
+
+}
