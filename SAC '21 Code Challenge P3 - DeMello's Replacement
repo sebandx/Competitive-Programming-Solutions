@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cmath>
+#include <limits>
+
+int main() {
+    int n, p;
+    std::cin >> n >> p;
+    
+    long long big = std::numeric_limits<long long>::min();
+    long long smol = std::numeric_limits<long long>::max();
+    std::string bigName, smolName;
+    
+    for (int i = 0; i < n; i++) {
+        std::string name;
+        std::cin >> name;
+        
+        long long arr[3];
+        for (int j = 0; j < 3; j++) {
+            std::cin >> arr[j];
+        }
+        
+        long long score = static_cast<long long>(std::floor(4 * std::sqrt(arr[0]) + 3 * std::pow(arr[1], p) - 4 * arr[2]));
+        
+        if (score > big) {
+            big = score;
+            bigName = name;
+        }
+        
+        if (score < smol) {
+            smol = score;
+            smolName = name;
+        }
+    }
+    
+    std::cout << bigName << " " << big << std::endl;
+    std::cout << smolName << " " << smol << std::endl;
+    
+    return 0;
+}
