@@ -1,0 +1,40 @@
+import java.util.*;
+import java.io.*;
+public class CCC07J3 {
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		int[] opened = new int[n];
+		for (int i = 0; i < n; i++) {
+			opened[i] = Integer.parseInt(br.readLine());
+		}
+		int offer = Integer.parseInt(br.readLine());
+		
+		HashMap<Integer, Integer> cases = new HashMap<Integer, Integer>();
+		
+		cases.put(1, 100);
+		cases.put(2, 500);
+		cases.put(3, 1000);
+		cases.put(4, 5000);
+		cases.put(5, 10000);
+		cases.put(6, 25000);
+		cases.put(7, 50000);
+		cases.put(8, 100000);
+		cases.put(9, 500000);
+		cases.put(10, 1000000);
+		
+		double sum = 100 + 500 + 1000 + 5000 + 10000 + 25000 + 50000 + 100000 + 500000 + 1000000;
+		for (int num : opened) {
+			sum-=cases.get(num);
+		}
+		sum = sum / (10 - n);
+
+		if (sum > offer) {
+			System.out.println("no deal");
+		}
+		else {
+			System.out.println("deal");
+		}
+		
+	}
+}
