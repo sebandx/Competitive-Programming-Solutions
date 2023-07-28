@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    int n; int q;
+    cin >> n >> q;
+
+    vector<double> distance(n);
+    for (int i = 0; i < n; i++) {
+        int x; int y;
+        cin >> x >> y;
+        distance[i] = sqrt(pow(x, 2) + pow(y, 2));
+    }
+
+    sort(distance.begin(), distance.end());
+
+
+    vector<int> numHouses(1414215);
+
+
+
+
+    for (int i = 0; i < n; i++) {
+        int val = ceil(distance[i]);
+        numHouses[val] = numHouses[val] + 1;
+    }
+
+    for (int i = 0; i < numHouses.size(); i++) {
+        if (i > 0) {
+            numHouses[i] = numHouses[i] + numHouses[i - 1];
+        }
+    }
+
+    for (int i = 0; i < q; i++) {
+        int r;
+        cin >> r;
+        cout << numHouses[r] << "\n";
+
+
+    }
+
+}
