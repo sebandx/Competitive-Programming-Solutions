@@ -1,0 +1,54 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer st;
+	public static void main(String[] args) throws IOException{
+		
+		
+		int t = Integer.parseInt(br.readLine());
+		for (int i = 0; i < t; i++) {
+			int n = Integer.parseInt(br.readLine());
+			Stack<Integer> mountainTop = new Stack<Integer>(); 
+			Stack<Integer> branch = new Stack<Integer>();  		
+			for (int j = 0; j < n; j++) {
+				mountainTop.push(Integer.parseInt(br.readLine()));
+			}
+			
+			int min = 1;
+      boolean thing = false;
+			while (!mountainTop.empty() || !branch.empty()) {
+				if (mountainTop.empty() && branch.peek() != min) {
+					System.out.println("N");
+          thing = true;
+					break;
+				}
+
+        while (!branch.empty() && branch.peek() == min) {
+          branch.pop();
+					min++;
+        }
+
+        
+				if (!mountainTop.empty()) {
+					if (mountainTop.peek() == min) {
+						mountainTop.pop();
+						min++;
+					}
+					else {
+						branch.push(mountainTop.pop());
+					}
+				}
+				
+				
+        
+			}
+      if (thing == false) {
+        System.out.println("Y");
+      }
+		}
+    
+
+	}
+}
