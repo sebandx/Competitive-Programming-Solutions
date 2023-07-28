@@ -1,0 +1,100 @@
+import java.util.*;
+public class Main {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    int numSwaps = 0;
+    String books = input.nextLine();
+    String[] bookArr = books.split("");
+    int numLs = 0;
+    int numMs = 0;
+    int numSs = 0;
+    for (int i = 0; i < bookArr.length; i++) {
+      String book = bookArr[i];
+      if (book.equals("L")) {
+        numLs++;
+      }
+      else if (book.equals("M")) {
+        numMs++;
+      }
+      else {
+        numSs++;
+      }
+    }
+
+    int numMinL = 0;
+    int numSinL = 0;
+
+    for (int i = 0; i < numLs; i++) {
+      String book = bookArr[i];
+      if (book.equals("M")) {
+        numMinL++;
+      }
+      else if (book.equals("S")) {
+        numSinL++;
+      }
+    }
+
+    int numLinM = 0;
+    int numSinM = 0;
+    for (int i = numLs; i < numLs + numMs; i++) {
+      String book = bookArr[i];
+      if (book.equals("L")) {
+        numLinM++;
+      }
+      else if (book.equals("S")) {
+        numSinM++;
+      }
+    }
+    
+    int numMinS = 0;
+    int numLinS = 0;
+    for (int i = numLs + numMs; i < bookArr.length; i++) {
+      String book = bookArr[i];
+      if (book.equals("M")) {
+        numMinS++;
+      }
+      else if (book.equals("L")) {
+        numLinS++;
+      }
+    }
+
+    
+    int leftMorL = Math.abs(numMinL - numLinM);
+    if (numMinL > numLinM) {
+      numSwaps+=numLinM;
+    } else {
+      numSwaps+=numMinL;
+    } 
+    
+    int leftSorL = Math.abs(numSinL - numLinS);
+    if (numSinL > numLinS) {
+      numSwaps+=numLinS;
+    } else {
+      numSwaps+=numSinL;
+    }
+
+    int leftSorM = Math.abs(numSinM - numMinS);
+    if (numSinM > numMinS) {
+      numSwaps+=numMinS;
+    } else {
+      numSwaps+=numSinM;
+    }
+
+    if (leftMorL == leftSorL && leftSorL == leftSorM && leftSorM > 0) {
+      System.out.println(numSwaps + (leftMorL + leftSorL));
+    }
+    else if ((leftMorL + leftSorL + leftSorM) > 0 && (leftMorL + leftSorL + leftSorM)%2 != 0) {
+       System.out.println(numSwaps + (leftMorL + leftSorL + leftSorM)/2 + 1);
+    }
+      else if ((leftMorL + leftSorL + leftSorM) > 0 && (leftMorL + leftSorL + leftSorM)%2 == 0) {
+        System.out.println(numSwaps + (leftMorL + leftSorL + leftSorM)/2);
+      }
+    else {
+       System.out.println(numSwaps);
+    }
+   
+
+
+    
+  }
+}
