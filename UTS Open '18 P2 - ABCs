@@ -1,0 +1,42 @@
+import java.util.*;
+import java.io.*;
+
+public class UTSOpen18P2ABCs {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int[] a = new int[3];
+		for (int i = 0; i < 3; i++) {
+			a[i] = Integer.parseInt(st.nextToken());
+		}
+		st = new StringTokenizer(br.readLine());
+		int[] b = new int[3];
+		for (int i = 0; i < 3; i++) {
+			b[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		st = new StringTokenizer(br.readLine());
+		int[] c = new int[3];
+		for (int i = 0; i < 3; i++) {
+			c[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		int sum = 0;
+		for (int i = 0; i < 3; i++) {
+			if (i == 0) {
+				if (b[0] == a[2] && c[0] > 0) {
+					sum += c[0];
+				}
+			} else {
+				if (b[i] == a[i - 1] && c[i] > 0) {
+					sum += c[i];
+				}
+			}
+		}
+		
+		System.out.println(sum);
+		
+			
+		
+	}
+}
