@@ -1,0 +1,51 @@
+import java.util.*;
+import java.io.*;
+public class MCCC22J2 {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer st;
+	public static void main(String[] args) throws IOException {
+		int numObstacles = Integer.parseInt(next());
+		int heightAndrew = Integer.parseInt(next());
+		int heightTommy = Integer.parseInt(next());
+		
+		int TA = 0;
+		int TT = 0;
+		for (int i = 0; i < numObstacles; i++) {
+			int AH = Integer.parseInt(next());
+			int TH = Integer.parseInt(next());
+			
+			if (heightAndrew > AH) {
+				TA++;
+			}
+			else {
+				TA+=2;
+			}
+			
+			if (heightTommy > TH) {
+				TT++;
+			}
+			else {
+				TT+=2;
+			}
+		}
+		
+		if (TA < TT) {
+			System.out.println("Andrew wins!");
+		}
+		else if (TT < TA) {
+			System.out.println("Tommy wins!");
+		}
+		else {
+			System.out.println("Tie!");
+		}
+		
+
+	}
+	static String next () throws IOException {
+        while (st == null || ! st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine().trim());
+        return st.nextToken();
+    }
+
+
+}
