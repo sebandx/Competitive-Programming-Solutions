@@ -1,0 +1,24 @@
+import java.util.*;
+import java.io.*;
+public class Main {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer st;
+	public static void main(String[] args) throws IOException{
+		int num = Integer.parseInt(br.readLine());
+		HashMap<String, Integer> peppers = new HashMap<String, Integer>();
+		peppers.put("Poblano", 1500);
+		peppers.put("Mirasol", 6000);
+		peppers.put("Serrano", 15500);
+		peppers.put("Cayenne", 40000);
+		peppers.put("Thai", 75000);
+		peppers.put("Habanero", 125000);
+		
+		int total = 0;
+		for (int i = 0; i < num; i++) {
+			total += peppers.get(br.readLine());
+		}
+		System.out.println(total);
+
+	}
+
+}
