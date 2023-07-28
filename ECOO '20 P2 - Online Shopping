@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main() {
+  int t;
+  cin >> t;
+  for (int i = 0; i < t; i++) {
+    int n;
+    cin >> n;
+    vector<unordered_map<string, vector<int>>> stores(n);
+    for (int j = 0; j < n; j++) {
+      int m;
+      cin >> m;
+      unordered_map<string, vector<int>> store;
+      for (int k = 0; k < m; k++) {
+        string s; int p; int q;
+        cin >> s >> p >> q;
+        vector<int> item = {p, q};
+        store[s] = item;
+      }
+      stores[j] = store;
+    }
+    ll minCostTotal = 0;
+    int k;
+    cin >> k;
+    for (int i = 0; i < k; i++) {
+      string s; int d;
+      cin >> s >> d;
+      while (d > 0) {
+        ll minCost = LLONG_MAX;
+        int minCostIndex = -1;
+        for (int j = 0; j < stores.size(); j++) {
+          if (stores[j].find(s) != stores[j].end() && stores[j][s][0] < minCost) {
+            minCost = stores[j][s][0];
+            minCostIndex = j;
+          }
+        }
+        if (minCostIndex == -1) break;
+        if (stores[minCostIndex][s][1] >= d) {
+          stores[minCostIndex][s][1]-=d;
+          minCostTotal += minCost * d;
+          d = 0;
+        } else {
+          minCostTotal += stores[minCostIndex][s][1] * minCost;
+          d -= stores[minCostIndex][s][1];
+          stores[minCostIndex].erase(s);
+        }
+      }
+    }
+    cout << minCostTotal << "\n";
+  }
+  return 0;
+}
