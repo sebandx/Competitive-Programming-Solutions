@@ -1,0 +1,35 @@
+import java.util.*;
+import java.io.*;
+public class MCCC22J3 {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer st;
+	public static void main(String[] args) throws IOException{
+		int num = Integer.parseInt(br.readLine());
+		int sum = 0;
+		
+		int[] arr = new int[num];
+		for (int i = 0; i < num; i++) {
+			int value = Integer.parseInt(next());
+			sum+=value;
+			arr[i] = value;
+		}
+		
+		int cSum = 0;
+		for (int i = 0; i < num; i++) {
+			int value = arr[i];
+			cSum+=value;
+			if (cSum*2 == sum) {
+				System.out.println(i + 1);
+				System.exit(0);
+			}
+		}
+		System.out.println("Andrew is sad.");
+	}
+	static String next () throws IOException {
+        while (st == null || ! st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine().trim());
+        return st.nextToken();
+    }
+
+
+}
