@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int r; int c;
+    cin >> r >> c;
+    vector<bool> visibleR(r);
+    
+    vector<bool> visibleC(c);
+  
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+          char input;
+          cin >> input;
+          if (input == 'X') {
+            visibleR[j] = true;
+            visibleC[i] = true;
+          }
+        }
+    }
+
+    
+
+    
+
+
+
+  
+    
+    int q;
+    cin >> q;
+    
+    
+    for (int i = 0; i < q; i++) {
+      int x;
+      int y;
+      cin >> x >> y;
+
+      if (visibleC[y - 1] || visibleR[x - 1]) {
+        cout << "Y" << "\n";
+      } else {
+        cout << "N" << "\n";
+      }
+
+      
+    }
+
+    
+
+    return 0;
+}
