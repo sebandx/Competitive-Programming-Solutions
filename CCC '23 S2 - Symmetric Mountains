@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int a;
+    cin >> a;
+    vector<int> mountains(a);
+
+    for (int i = 0; i < a; i++) {
+        cin >> mountains[i];
+    }
+    vector<int> minVal(a + 1, numeric_limits<int>::max());
+    minVal[0] = 0;
+    // loop through the physical midpoints 
+    for (int i = 0; i < a; i++) {
+      int end = min(i, (a - 1) - i);
+      int val = 0;
+      for (int j = 1; j <= end; j++) {
+        val += abs(mountains[i + j] - mountains[i - j]);
+        if (val < minVal[2*j]) {
+          minVal[2*j] = val;
+        }
+      }
+    }
+
+    // loop through the imaginary midpoints 
+    for (int i = 1; i < a; i++) {
+      int val = 0;
+
+      int l = i;
+      int r = i - 1;
+      while (l < a && r >= 0) {
+        val += abs(mountains[l] - mountains[r]);
+        if (val < minVal[l - r]) {
+          minVal[l - r] = val;
+        }
+        l++;
+        r--;
+      }
+      
+
+    }
+
+    for (int i = 0; i < a; i++) {
+      cout << minVal[i] << " ";
+    }
+    return 0;
+}
