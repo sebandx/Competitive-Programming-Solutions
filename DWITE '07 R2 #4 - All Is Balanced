@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    string line;
+    cin >> line;
+    stack<char> pars;
+    bool balanced = true;
+    for (auto c : line) {
+      if (c == '(' || c == '{' || c == '[') {
+        pars.push(c);
+      } else if (c == ')') {
+        if (pars.empty() || pars.top() != '(') {
+          balanced = false;
+          break;
+        } else if (!pars.empty()) {
+          pars.pop();
+        }
+      } else if (c == ']') {
+        if (pars.empty() || pars.top() != '[') {
+          balanced = false;
+          break;
+        } else if (!pars.empty()) {
+          pars.pop();
+        }
+      } else if (c == '}') {
+        if (pars.empty() || pars.top() != '{') {
+          balanced = false;
+          break;
+        } else if (!pars.empty()) {
+          pars.pop();
+        }
+      }
+    }
+    
+    if (balanced && pars.empty()) {
+      cout << "balanced" << "\n";
+    } else {
+      cout << "not balanced" << "\n";
+    }
+  }
+}
