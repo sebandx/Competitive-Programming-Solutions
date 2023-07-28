@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int MM = 1e5+5;
+int B, F, f[MM], e[MM], p[MM], failed[MM], ans;
+int main(){
+    ios::sync_with_stdio(0); cin.tie(0);
+    cin >> B;
+    for(int i=0; i<B; i++) cin >> f[i] >> e[i] >> p[i];
+    cin >> F;
+    for(int i=0; i<F; i++) cin >> failed[i];
+    sort(failed, failed+F);
+    for(int i=0; i<B; i++){
+        //count the num of failed cases in [f[i], e[i]]
+        int cnt = upper_bound(failed, failed+F, e[i])
+            - lower_bound(failed, failed+F, f[i]);
+        if(cnt == 0) ans += p[i];
+    }
+    cout << ans << endl;
+}
