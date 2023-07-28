@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+    int questionType = input.nextInt();
+    int numNs = input.nextInt();
+    int num;
+    Integer[] arrD = new Integer[numNs];
+    Integer[] arrP = new Integer[numNs];
+    
+    for (int i = 0; i < numNs; i++) {
+      num = input.nextInt();
+      arrD[i] = num;
+    }
+    
+    for (int i = 0; i < numNs; i++) {
+      num = input.nextInt();
+      arrP[i] = num;
+    }
+
+    if (questionType == 1) {
+      Arrays.sort(arrP);
+      Arrays.sort(arrD);
+    }
+    else if (questionType == 2) {
+      Arrays.sort(arrP);
+      Arrays.sort(arrD, Collections.reverseOrder()); 
+    }
+    int sum = 0;
+    
+    for (int i = 0; i < numNs; i++) {
+      if (arrP[i] > arrD[i]) {
+        sum += arrP[i];
+      }
+      else {
+        sum += arrD[i];
+      }
+    }
+
+    System.out.println(sum);
+    }
+}
