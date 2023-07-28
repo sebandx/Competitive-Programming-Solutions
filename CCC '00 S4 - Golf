@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int distance;
+    int numClubs;
+
+    cin >> distance;
+    cin >> numClubs;
+    
+    vector<int> clubs(numClubs);
+
+    for (int i = 0; i < numClubs; i++) {
+      cin >> clubs[i];
+    }
+
+    vector<int> minDistance(distance + 1, 5280);
+    minDistance[0] = 0;
+
+
+    for (int i = 0; i < distance + 1; i++) {
+      // check if swinging the club to get to that location
+      // gets u to that location faster
+      // that the current min swings
+      // if so u replace that value
+      for (int j = 0; j < numClubs; j++) {
+        if (i + clubs[j] <= distance) {
+          if (minDistance[i] + 1 < minDistance[i + clubs[j]]) {
+            minDistance[i + clubs[j]] = minDistance[i] + 1;
+          }
+        }
+      }
+    }
+
+    if (minDistance[distance] < 5280) {
+      cout << "Roberta wins in " << minDistance[distance] << " strokes.";
+    } else {
+      cout << "Roberta acknowledges defeat.";
+    }
+
+    
+    return 0;
+}
