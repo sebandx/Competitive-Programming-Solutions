@@ -1,0 +1,36 @@
+num = int(input())
+counter = 0
+days = [0,0,0,0,0]
+while (counter < num):
+    string = input()
+    i = 0
+    for char in string:
+        if (char == "Y"):
+            days[i] = days[i] + 1
+        i+=1
+    counter+=1
+
+maxValue = -1
+
+maxes = []
+
+i = 0
+for num in days:
+    if (num > maxValue):
+        maxValue = num
+        maxes = []
+        maxes.append(i + 1)
+    elif (num == maxValue):
+        maxes.append(i + 1)
+    i+=1
+
+maxes.sort()
+
+if (len(maxes) == 1):
+    print(maxes[0])
+else:
+    k = 0
+    while (k < len(maxes) - 1):
+        print(maxes[k], end=",")
+        k+=1
+    print(maxes[len(maxes) - 1])
