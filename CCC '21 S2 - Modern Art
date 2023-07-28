@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+public class Main {
+  public static ArrayList<Integer> sortDuplicates(ArrayList<Integer> withDuplicats) {
+    HashMap <Integer, Integer> numOccurences = new HashMap<Integer, Integer>();
+    ArrayList <Integer> noDuplicats = new ArrayList<Integer>();
+    for (int i = 0; i < withDuplicats.size(); i++) {
+      int num = withDuplicats.get(i);
+      int occurance = numOccurences.getOrDefault(num, 0);
+      numOccurences.put(num, occurance + 1);
+    }
+    for (int i = 0; i < withDuplicats.size(); i++) {
+      int num = withDuplicats.get(i);
+      if (numOccurences.containsKey(num) && numOccurences.get(num)%2 != 0 || numOccurences.containsKey(num) && numOccurences.get(num) == 1) {
+        noDuplicats.add(num);
+        numOccurences.remove(num);
+      }
+    }
+    return noDuplicats;
+  }
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    ArrayList<Integer> listR =new ArrayList<>();
+    ArrayList<Integer> listC =new ArrayList<>();
+    int rows = input.nextInt();
+    int cols = input.nextInt();
+    int numStrokes = input.nextInt(); 
+    for (int i = 0; i < numStrokes; i++) {
+      char RC = input.next().charAt(0);
+      int row = input.nextInt();
+      if (RC == 'R') {
+        listR.add(row);
+      }
+      else {
+        listC.add(row);
+      }  
+    }
+
+    listR = sortDuplicates(listR);
+    listC = sortDuplicates(listC);
+    
+    int lenR = listR.size();
+    int lenC = listC.size();
+    int sum = lenR*cols + lenC*rows;
+    sum = sum - 2*lenR*lenC;
+
+    System.out.println(sum);
+
+  }
+}
