@@ -1,0 +1,53 @@
+import java.util.*;
+import java.io.*;
+import java.math.BigInteger;
+
+
+public class geographyClass {
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		long[] arr = new long[n];
+		for (int i = 0; i < n; i++) {
+			arr[i] = Long.parseLong(br.readLine());
+			
+		}
+		
+		long[] solution = sumOfSquaredFactors(arr);
+		for (long num : solution) {
+			System.out.println(num);
+		}
+	}
+	public static long[] sumOfSquaredFactors(long[] nums) {
+	        Map<Long, Long> cache = new HashMap<>();
+	        long[] results = new long[nums.length];
+
+	        for (int i = 0; i < nums.length; i++) {
+	            long num = nums[i];
+
+	            if (cache.containsKey(num)) {
+	                results[i] = cache.get(num);
+	            } else {
+	                long sum = 0;
+	                long limit = (long)Math.sqrt(num);
+
+	                for (long j = 1; j <= limit; j++) {
+	                    if (num % j == 0) {
+	                        long square = j * j;
+	                        if (num / j == j) {
+	                            sum += square;
+	                        } else {
+	                            sum += square + (num / j) * (num / j);
+	                        }
+	                    }
+	                }
+
+	                results[i] = sum;
+	                cache.put(num, sum);
+	            }
+	        }
+
+	        return results;
+	    }
+	}
