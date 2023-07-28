@@ -1,0 +1,43 @@
+import java.util.*;
+import java.io.*;
+public class CCC17S2 {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
+ 
+    public static void main(String[] args) throws IOException{
+    	int num = Integer.parseInt(br.readLine());
+    	int[] m = new int[num];
+    	for (int i = 0; i < num; i++) {
+    		m[i] = Integer.parseInt(next());
+    	}
+    	Arrays.sort(m);
+    	
+    	if (num == 1) {
+    		System.out.println(m[0]);
+    	}
+    	else if (num % 2 != 0) {
+    		int j = num / 2;
+    		for (int i = num / 2 + 1; i < num && j >= 0; i++) {
+    			System.out.print(m[j] + " " + m[i] + " ");
+    			j--;
+    		}
+    		System.out.print(m[j]);
+    	}
+    	else {
+    		int j = num/2 - 1;
+        	for (int i = num/2; i < num && j >= 0; i++) {
+        		System.out.print(m[j] + " " + m[i] + " ");
+        		j--;
+        	}
+    	}
+    	
+    	
+    }
+ 
+    static String next () throws IOException {
+        while (st == null || ! st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine().trim());
+        return st.nextToken();
+    }
+
+}
