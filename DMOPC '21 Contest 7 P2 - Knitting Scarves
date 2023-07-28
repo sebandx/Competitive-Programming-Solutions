@@ -1,0 +1,62 @@
+#include <iostream>
+#include <vector>
+
+class Node {
+public:
+    int num;
+    Node* prev;
+    Node* next;
+
+    Node(int num) {
+        this->num = num;
+        this->prev = nullptr;
+        this->next = nullptr;
+    }
+};
+
+int main() {
+    int n, q;
+    std::cin >> n >> q;
+
+    std::vector<Node*> a(n + 2);
+    Node* head = new Node(0);
+    a[0] = head;
+    Node* cur = head;
+
+    for (int i = 0; i <= n; i++) {
+        cur->next = new Node(i + 1);
+        cur->next->prev = cur;
+        cur = cur->next;
+        a[i + 1] = cur;
+    }
+
+    for (int i = 0; i < q; i++) {
+        int l, r, kval;
+        std::cin >> l >> r >> kval;
+
+        Node* left = a[l];
+        Node* right = a[r];
+        Node* k = a[kval];
+
+        Node* leftPrev = left->prev;
+        Node* rightNext = right->next;
+        Node* kNext = k->next;
+
+        if (kNext->num != l) {
+            left->prev = k;
+            k->next = left;
+            right->next = kNext;
+            kNext->prev = right;
+            leftPrev->next = rightNext;
+            rightNext->prev = leftPrev;
+        }
+    }
+
+    cur = head->next;
+    while (cur->num != n + 1) {
+        std::cout << cur->num << " ";
+        cur = cur->next;
+    }
+
+    return 0;
+}
