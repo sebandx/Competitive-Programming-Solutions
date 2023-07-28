@@ -1,0 +1,79 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        HashMap <Integer, Integer> readings = new HashMap<Integer, Integer>();
+    Scanner input = new Scanner(System.in);
+    int numReadings = input.nextInt();
+    for (int i = 0; i < numReadings; i++) {
+      int reading = input.nextInt();
+      if (readings.containsKey(reading)) {
+        readings.replace(reading, readings.get(reading) + 1);
+      }
+      else {
+        readings.put(reading, 1);
+      }
+    }
+
+    Collection<Integer> values = readings.values();
+    ArrayList<Integer> numOccurences = new ArrayList<>(values);
+    Collections.sort(numOccurences);
+
+    Collection<Integer> keys = readings.keySet();
+    ArrayList<Integer> readingValue = new ArrayList<>(keys);
+    Collections.sort(readingValue);
+    
+    int greatestNumOccurence = numOccurences.get(numOccurences.size() - 1);
+    boolean secondGreatest = false;
+    int i = numOccurences.size() - 2;
+    while (i >= 0) {
+      if (numOccurences.get(i) != greatestNumOccurence) {
+        secondGreatest = true;
+        break;
+      }
+      i--;
+    }
+    
+    if (secondGreatest == false) {
+      System.out.println(Math.abs(readingValue.get(readingValue.size() -1) - readingValue.get(0)));
+    }
+    else {
+      int SGnumOccurence = numOccurences.get(i);
+      int GGreatestValue = -1000000;
+      int GLowestValue = 1000000;
+      int SGLowestValue = 1000000;
+      int SGGreatestValue = -1000000;
+      int GGnumOccurences = 0;
+      for (int j = 0; j < readingValue.size(); j++) {
+        if (readings.get(readingValue.get(j)) == SGnumOccurence) {
+          if (readingValue.get(j) < SGLowestValue) {
+            SGLowestValue = readingValue.get(j);
+          }
+          if (SGGreatestValue < readingValue.get(j)) {
+            SGGreatestValue = readingValue.get(j);
+          }
+          
+        }
+        else if (readings.get(readingValue.get(j)) == greatestNumOccurence) {
+          GGnumOccurences++;
+          if (readingValue.get(j) < GLowestValue) {
+            GLowestValue = readingValue.get(j);
+          }
+          if (GGreatestValue < readingValue.get(j)) {
+            GGreatestValue = readingValue.get(j);
+          }
+        }
+      }
+      if (GGnumOccurences > 1) {
+        System.out.println(Math.abs(GGreatestValue - GLowestValue));
+      }
+      else if (Math.abs(GGreatestValue - SGLowestValue) > Math.abs(SGGreatestValue - GLowestValue)) {
+        System.out.println(Math.abs(GGreatestValue - SGLowestValue));
+      }
+      else {
+        System.out.println(Math.abs(SGGreatestValue - GLowestValue));
+      }
+    }
+    }
+}
