@@ -1,0 +1,26 @@
+import java.util.*;
+import java.io.*;
+public class MCCC22J1 {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer st;
+	public static void main(String[] args) throws IOException{
+		int costF = Integer.parseInt(next());
+		int costM = Integer.parseInt(next());
+		int costB = Integer.parseInt(next());
+		
+		int numF = Integer.parseInt(next());
+		int numM = Integer.parseInt(next());
+		int numB = Integer.parseInt(next());
+		
+		int numPeople = numF + numM + numB;
+		int cost = costF*numF + costM*numM + costB*numB;
+		System.out.println(numPeople + " " + cost);
+	}
+	static String next () throws IOException {
+        while (st == null || ! st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine().trim());
+        return st.nextToken();
+    }
+
+
+}
