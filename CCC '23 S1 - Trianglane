@@ -1,0 +1,49 @@
+import java.util.*;
+public class CCC23J42 {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int numColumns = input.nextInt();
+		int[] arr1 = new int[numColumns];
+		int[] arr2 = new int[numColumns];
+		
+		int num1s = 0;
+		for (int i = 0; i < numColumns; i++) {
+			
+			int value = input.nextInt();
+			if (value == 1) {
+				num1s+=3;
+			}
+			arr1[i] = value;
+		}
+		
+		for (int i = 0; i < numColumns; i++) {
+			int value = input.nextInt();
+			if (value == 1) {
+				num1s+=3;
+			}
+			arr2[i] = value;
+		}
+		
+		for (int i = 1; i < numColumns; i++) {
+			if (arr1[i] == 1 && arr1[i - 1] == 1) {
+				num1s-=2;
+			}
+		}
+		
+		for (int i = 1; i < numColumns; i++) {
+			if (arr2[i] == 1 && arr2[i - 1] == 1) {
+				num1s-=2;
+			}
+		}
+		
+		for (int i = 0; i < numColumns; i+=2) {
+			if (arr1[i] == 1 && arr2[i] == 1) {
+				num1s-=2;
+			}
+		}
+		
+		System.out.println(num1s);
+		
+		
+	}
+}
