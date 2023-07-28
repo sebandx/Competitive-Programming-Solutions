@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        long N = scanner.nextLong();
+        long K = scanner.nextLong();
+        long X = scanner.nextLong();
+        long pw = 1;
+
+        for (int i = 1; i < N; i++) {
+            System.out.print((K - 1) + " ");
+            pw = (pw * 2) % K;
+        }
+
+        pw = ((pw - 1 + K) % K) * (K - 1) % K;
+        System.out.println((X - pw + K) % K);
+    }
+}
