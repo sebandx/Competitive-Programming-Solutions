@@ -1,0 +1,23 @@
+import java.util.*;
+import java.io.*;
+
+public class CCC01J2ModInverse {
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int x = Integer.parseInt(br.readLine());
+		
+		int m = Integer.parseInt(br.readLine());
+		
+		// modular inverse is n
+		// (x * n) modulus by m == 1
+		// your goal is to output n
+		
+		for (int i = 1; i < m; i++) {
+			if ((x * i) % m == 1) {
+				System.out.println(i);
+				System.exit(0);
+			}
+		}
+		System.out.println("No such integer exists.");
+	}
+}
