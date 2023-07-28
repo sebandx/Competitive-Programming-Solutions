@@ -1,0 +1,46 @@
+import java.util.*;
+import java.io.*;
+public class newCCC96S5 {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer st;
+	public static void main(String[] args) throws IOException{
+		int count = Integer.parseInt(br.readLine());
+		for (int i = 0; i < count; i++) {
+			int num = Integer.parseInt(br.readLine());
+			int[] arr1 = new int[num];
+			int[] arr2 = new int[num];
+			for (int j = 0; j < num; j++) {
+				arr1[j] = Integer.parseInt(next());
+			}
+			
+			for (int j = 0; j < num; j++) {
+				arr2[j] = Integer.parseInt(next());
+			}
+			
+			int p1 = num - 1;
+			int p2 = num - 1;
+			
+			int maxDistance = 0;
+			int currentValue = arr2[p2];
+			while (p1 > 0 && p2 > 0) {
+				if (arr1[p1 - 1] <= arr2[p2]) {
+					p1--;
+				}
+				else {
+					p2--;
+				}
+				
+				if (p2 - p1 > maxDistance) {
+					maxDistance = p2 - p1;
+				}
+			}
+			System.out.println("The maximum distance is " + maxDistance);
+		}
+	}
+    static String next () throws IOException {
+        while (st == null || ! st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine().trim());
+        return st.nextToken();
+    }
+
+}
