@@ -1,0 +1,19 @@
+import java.util.*;
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int numPackages = input.nextInt();
+		int numCollisions = input.nextInt();
+		
+		if (numPackages > numCollisions) {
+			System.out.println(50*numPackages - 10*numCollisions + 500);
+		}
+		else {
+			System.out.println(50*numPackages - 10*numCollisions);
+		}
+		
+
+	}
+
+}
