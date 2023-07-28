@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+#include <algorithm>
+#include <iterator>
+
+int main() {
+  int x;
+  cin >> x;
+  // remember a student might need to be in the same group as multiple people
+  // make sure to tie the unordered map both ways
+  unordered_map<string, set<string>> sameGroup;
+  for (int i = 0; i < x; i++) {
+    string name1; string name2;
+    cin >> name1 >> name2;
+    if (sameGroup.find(name1) == sameGroup.end()) {
+      sameGroup[name1] = {name2};
+    } else {
+      sameGroup[name1].insert(name2);
+    }
+
+    
+  }
+
+  int y;
+  cin >> y;
+  
+  unordered_map<string, set<string>> diffGroup;
+  for (int i = 0; i < y; i++) {
+    string name1; string name2;
+    cin >> name1 >> name2;
+    if (diffGroup.find(name1) == diffGroup.end()) {
+      diffGroup[name1] = {name2};
+    } else {
+      diffGroup[name1].insert(name2);
+    }
+
+    
+  }
+
+  int g;
+  cin >> g;
+
+  int numViolations = 0;
+  for (int i = 0; i < g; i++) {
+    set<string> names;
+    string name1, name2, name3;
+    cin >> name1 >> name2 >> name3;
+
+    names.insert(name1); names.insert(name2); names.insert(name3);
+
+    for (string name : names) {
+      if (sameGroup.find(name) != sameGroup.end()) {
+        auto needIn = sameGroup[name];
+        vector<string> difference;
+        set_difference(needIn.begin(), needIn.end(), names.begin(), names.end(),         inserter(difference, difference.begin()));
+        numViolations += difference.size();
+      } 
+      if (diffGroup.find(name) != diffGroup.end()) {
+        auto needOut = diffGroup[name];
+        vector<string> intersection;
+        set_intersection(needOut.begin(), needOut.end(), names.begin(),     names.end(), inserter(intersection, intersection.begin()));
+        numViolations += intersection.size();
+
+      }
+    }
+  }
+
+  cout << numViolations << "\n";
+  return 0;
+}
