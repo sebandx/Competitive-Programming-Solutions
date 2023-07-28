@@ -1,0 +1,38 @@
+import java.util.*;
+import java.io.*;
+import java.math.BigInteger;
+
+public class AMathContestP2SubsequenceSum {
+
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int n = Integer.parseInt(br.readLine());
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int[] arr = new int[n];
+		long sum = 0;
+		for (int i = 0; i < n; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+		}
+		
+
+
+		System.out.println(sumOfSubsets(arr).mod(BigInteger.valueOf(1000000007)));
+	}
+	
+
+	public static BigInteger sumOfSubsets(int[] arr) {
+	    BigInteger sum = BigInteger.ZERO;
+	    for (int num : arr) {
+	        sum = sum.add(BigInteger.valueOf(num));
+	    }
+	    
+	    BigInteger two = BigInteger.valueOf(2);
+	    BigInteger subsetsCount = two.pow(arr.length - 1);
+	    
+	    return sum.multiply(subsetsCount);
+	}
+
+
+
+}
