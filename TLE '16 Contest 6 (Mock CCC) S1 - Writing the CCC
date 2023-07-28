@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+# define long long ll;
+
+int main() {
+  int t;
+  cin >> t;
+  vector<string> pTypes(t);
+  unordered_map<string, vector<int>> pOrder;
+  for (int i = 0; i < t; i++) {
+    cin >> pTypes[i];
+    pOrder[pTypes[i]] = {};
+  }
+
+  int n;
+  cin >> n;
+  for (int i = 0; i < n; i++) {
+    string type;
+    cin >> type;
+    pOrder[type].push_back(i + 1);
+  }
+
+  for (int i = 0; i < t; i++) {
+    for (auto p : pOrder[pTypes[i]]) {
+      cout << p << "\n";
+    }
+  }
+  return 0;
+}
