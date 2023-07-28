@@ -1,0 +1,49 @@
+import java.util.*;
+import java.io.*;
+public class CCC17S1 {
+	static BufferedReader br = new BufferedReader(new InputStreamReader (System.in));
+	static StringTokenizer st;
+
+	public static void main(String[] args) throws IOException{
+		
+		int num = Integer.parseInt(br.readLine().trim());
+		
+		int[] swifts = new int[num];
+		int[] sophs = new int[num];
+		
+		for (int i = 0; i < num; i++) {
+			swifts[i] = readInt();
+		}
+		
+		for (int i = 0; i < num; i++) {
+			sophs[i] = readInt();
+		}
+		
+		
+		
+		for (int i = 1; i < num; i++) {
+			swifts[i] = swifts[i] + swifts[i - 1];
+			sophs[i] = sophs[i] + sophs[i - 1];
+		}
+		
+		
+		for (int i = num - 1; i >= 0; i--) {
+			if (swifts[i] == sophs[i]) {
+				System.out.println(i + 1);
+				System.exit(0);
+			}
+		}
+		System.out.println(0);
+	}
+    static String next () throws IOException {
+        while (st == null || ! st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine().trim());
+        return st.nextToken();
+    }
+    static int readInt () throws IOException {
+        return Integer.parseInt(next());
+    }
+
+
+
+}
