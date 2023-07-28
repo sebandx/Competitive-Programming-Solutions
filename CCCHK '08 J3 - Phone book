@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  int n;
+  cin >> n;
+  unordered_map<int, string> numberName;
+  unordered_map<int, int> count;
+
+  for (int i = 0; i < n; i++) {
+    string name; int num;
+    cin >> name >> num;
+    numberName[num] = name;
+    count[num] = 0;
+  }
+
+  int d;
+  cin >> d;
+  int maxVal = 0;
+  int maxsNumber = 0;
+  for (int i = 0; i < d; i++) {
+    int num;
+    cin >> num;
+    count[num] += 1;
+    if (count[num] > maxVal) {
+      maxVal = count[num];
+      maxsNumber = num;
+    } else if (count[num] == maxVal) {
+      maxsNumber = min(num, maxsNumber);
+    }
+  }
+
+  cout << numberName[maxsNumber] << "\n";
+  return 0;
+}
