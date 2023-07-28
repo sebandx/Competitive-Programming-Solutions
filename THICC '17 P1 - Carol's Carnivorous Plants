@@ -1,0 +1,15 @@
+import sys
+
+n, m = map(int, sys.stdin.readline().split())
+costs = list(map(int, sys.stdin.readline().split()))
+
+minCost = 0
+
+costs.sort(reverse=True)
+for i in range(m):
+    counter = 0
+    for j in range(i, n, m):
+        minCost += costs[j] ** counter
+        counter += 1
+
+print(minCost % 1000000007)
