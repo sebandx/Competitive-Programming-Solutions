@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool dfs(int vertex, bool visited[20], bool ancestors[20], unordered_map<int, vector<int>> molecule, int depth) {
+    visited[vertex - 1] = true;
+    ancestors[vertex - 1] = true;
+
+    vector<int> toVisit = molecule[vertex];
+    
+    for (int node : toVisit) {
+        if (ancestors[node - 1] == true && 6 == depth) {
+            cout << "YES";
+            exit(0);
+        } else if (ancestors[node - 1] == false) {
+            dfs(node, visited, ancestors, molecule, depth += 1);
+        }
+    }
+    ancestors[vertex - 1] = false;
+    return false;
+}
+int main() {
+    int n; int m;
+    cin >> n >> m;
+    
+    unordered_map<int, vector<int>> molecule;
+    //make this hashmap instead
+    for (int i = 0; i < m; i++) {
+        int val1;
+        int val2;
+        cin >> val1 >> val2;
+        molecule[val1].push_back(val2);
+    }
+    bool visited[20];
+    bool ancestors[20];
+
+    for (int i = 1; i <= n; i++) {
+        dfs(i, visited, ancestors, molecule, 1);
+    }
+
+    cout << "NO";
+    
+    
+
+    return 0;
+}
