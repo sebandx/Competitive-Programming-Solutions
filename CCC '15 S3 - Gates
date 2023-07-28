@@ -1,0 +1,65 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+  static PrintWriter pr = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+  static StringTokenizer st;
+
+  public static void main(String[] args) throws IOException {
+    ArrayList<Integer> gates = new ArrayList<Integer>();
+    int numGates = nextInt();
+    int numPlanes = nextInt();
+    
+    for (int i = 1; i <= numGates; i++) {
+      gates.add(i);
+    }
+    int planesParked = 0;
+    int i = 0;
+    while (i < numPlanes) {
+      int plane = nextInt();
+      if (plane < gates.get(0)) {
+        break;
+      }
+
+      int Hindex = gates.size() - 1;
+      int Lindex = 0;
+      int midIndex = (Hindex + Lindex) / 2;
+      boolean found = false;
+      while (Lindex <= Hindex) {
+        if (gates.get(midIndex) == plane) {
+          gates.remove(midIndex);
+          planesParked++;
+          found = true;
+          break;
+        }
+        else if (plane > gates.get(midIndex)) {
+          Lindex = midIndex + 1;
+          midIndex = (Lindex + Hindex)/2;
+        }
+        else if (plane < gates.get(midIndex)) {
+          Hindex = midIndex - 1;
+          midIndex = (Lindex + Hindex)/2;
+        }
+      }
+
+      if (found == false) {
+        gates.remove(midIndex);
+        planesParked++;
+      }
+      i++;
+    }
+
+    System.out.println(planesParked);    
+  }
+
+  static String next() throws IOException {
+     while (st == null || !st.hasMoreTokens())
+       st = new StringTokenizer(br.readLine().trim());
+    return st.nextToken();
+  }
+    
+  static int nextInt() throws IOException {
+    return Integer.parseInt(next());
+  }
+}
