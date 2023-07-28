@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static boolean unique(int year, int devisor) {
+    ArrayList<Integer> digits = new ArrayList <Integer>();
+    while (devisor > 0) {
+      digits.add(year/devisor);
+      year = year - (year/devisor)*devisor;
+      devisor = devisor/10;
+    }
+    Collections.sort(digits);
+
+    for (int i = 0; i < digits.size() - 1; i++) {
+      if (digits.get(i) == digits.get(i + 1)) {
+        return false;
+      }
+    }
+    return true;
+  }
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    int year = input.nextInt() + 1;
+    int devisor = 1;
+    while (devisor*10 < year) {
+      devisor = devisor*10;
+    }
+
+    boolean uniqueYear = unique(year, devisor);
+
+    while (uniqueYear == false) {
+      year++;
+      while (devisor*10 < year) {
+        devisor = devisor*10;
+      }
+      uniqueYear = unique(year, devisor);
+    }
+
+    System.out.println(year);
+   
+
+    
+  }
+}
