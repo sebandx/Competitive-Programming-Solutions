@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int b = 0; int n = 0;
+    list<char> songs(5);
+    songs.assign({'A', 'B', 'C', 'D', 'E'});
+    bool flag = true;
+    while (flag) {
+        cin >> b;
+        cin >> n;
+        if (b == 4 && n == 1) {
+            for (auto s : songs) {
+                cout << s << " ";
+            }
+            flag = false;
+            break;
+        } else {
+            if (b == 1) {
+                for (int i = 0; i < n; i++) {
+                    char f = songs.front();
+                    songs.pop_front();
+                    songs.push_back(f);
+                }
+            } else if (b == 2) {
+                for (int i = 0; i < n; i++) {
+                    char b = songs.back();
+                    songs.pop_back();
+                    songs.push_front(b);
+
+                }
+            } else if (b == 3) {
+                for (int i = 0; i < n; i++) {
+                    char f = songs.front();
+                    songs.pop_front();
+                    char ff = songs.front();
+                    songs.pop_front();
+
+                    songs.push_front(f);
+                    songs.push_front(ff);
+                }
+            }
+        }
+    }
+}
