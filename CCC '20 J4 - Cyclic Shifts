@@ -1,0 +1,19 @@
+import java.util.*;
+import java.io.*;
+public class normalCCC20J4 {
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer st;
+	public static void main(String[] args) throws IOException{
+		String text = br.readLine();
+		String word = br.readLine();
+		for (int i = 0; i < word.length(); i++) {
+			String shift = word.substring(i) + word.substring(0,i);
+			if (text.contains(shift)) {
+				System.out.println("yes");
+				System.exit(0);
+			}
+		}
+		System.out.println("no");
+	}
+
+}
