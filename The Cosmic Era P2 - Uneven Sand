@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+  long long h = 2000000000;
+  long long l = 1;
+  long long m = (l + h) / 2;
+
+  cout << m << '\n';
+
+  string status;
+  cin >> status;
+
+  while (status != "OK") {
+    if (status == "FLOATS") {
+      h = m - 1;
+      m = (l + h) / 2;
+    } else if (status == "SINKS") {
+      l = m + 1;
+      m = (l + h) / 2;
+    }
+    cout << m << '\n';
+    cin >> status;
+  }
+  return 0;
+}
