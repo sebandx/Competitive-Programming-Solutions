@@ -1,0 +1,17 @@
+import java.util.*;
+import java.io.*;
+public class DMOPC17C5P1 {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String sequences = br.readLine();
+		sequences = sequences.replace("0","O");
+		sequences = sequences.replace("1","l");
+		sequences = sequences.replace("3","E");
+		sequences = sequences.replace("4","A");
+		sequences = sequences.replace("5","S");
+		sequences = sequences.replace("6","G");
+		sequences = sequences.replace("8","B");
+		sequences = sequences.replace("9","g");
+		System.out.println(sequences);
+	}
+}
