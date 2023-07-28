@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class CCC10J2 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
+        int d = scanner.nextInt();
+        int s = scanner.nextInt();
+        int Nikky = (a - b) * (s / (a + b));
+        int Byron = (c - d) * (s / (c + d));
+
+        if (s % (a + b) <= a) {
+            Nikky += s % (a + b);
+        } else {
+            Nikky += 2 * a - s % (a + b);
+        }
+
+        if (s % (c + d) <= c) {
+            Byron += s % (c + d);
+        } else {
+            Byron += 2 * c - s % (c + d);
+        }
+
+        if (Byron > Nikky) {
+            System.out.println("Byron");
+        } else if (Byron < Nikky) {
+            System.out.println("Nikky");
+        } else {
+            System.out.println("Tied");
+        }
+    }
+}
