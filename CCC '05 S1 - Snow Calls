@@ -1,0 +1,60 @@
+import java.util.*;
+import java.io.*;
+public class CCC05S1 {
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int t = Integer.parseInt(br.readLine());
+		for (int i = 0; i < t; i++) {
+			String phoneNum = br.readLine();
+			phoneNum = phoneNum.replace("-", "");
+			
+			char[] arr = phoneNum.toCharArray();
+			for (int j = 0; j < 10; j++) {
+				if (arr[j] >= 'A' && arr[j] <= 'Z') {
+					char l = arr[j];
+					if (l >= 'W') {
+						arr[j] = '9';
+					}
+					else if (l >= 'T') {
+						arr[j] = '8';
+					}
+					else if (l >= 'P') {
+						arr[j] = '7';
+					}
+					else if (l >= 'M') {
+						arr[j] = '6';
+					}
+					else if (l >= 'J') {
+						arr[j] = '5';
+					}
+					else if (l >= 'G') {
+						arr[j] = '4';
+					}
+					else if (l >= 'D') {
+						arr[j] = '3';
+					}
+					else {
+						arr[j] = '2';
+					}
+				}
+			}
+			
+			int counter = 1;
+			for (char chr : arr) {
+				System.out.print(chr);
+				counter ++;
+				if (counter == 4 || counter == 7) {
+					System.out.print("-");
+				}
+				if (counter >= 11) {
+					break;
+				}
+			}
+			System.out.println();
+			
+			
+
+		}
+		
+	}
+}
