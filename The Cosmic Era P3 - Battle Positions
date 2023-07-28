@@ -1,0 +1,59 @@
+import java.util.*;
+import java.io.*;
+public class Main {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
+    public static void main(String[] args) throws IOException {
+        int numStations = readInt();
+        int minTroops = readInt();
+        int numWaves = readInt();
+        int[] stations = new int[numStations];
+        for (int i = 0; i < numWaves; i++) {
+            int xi = readInt();
+            int xf = readInt();
+            int troopSent = readInt();
+            stations[xi - 1] = stations[xi - 1] + troopSent;
+          if (xf != numStations) {
+            stations[xf] = stations[xf] - troopSent;
+          }
+          
+            
+        }
+        
+        int prevNum = 0;
+        for (int i = 0; i < stations.length; i++) {
+            stations[i] = stations[i] + prevNum;
+            prevNum = stations[i];
+        }
+        
+        int numViolations = 0;
+        for (int i = 0; i < stations.length; i++) {
+            if (stations[i] < minTroops) {
+                numViolations++;
+            }
+        }
+
+        System.out.println(numViolations);
+    }
+ 
+    static String next () throws IOException {
+        while (st == null || ! st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine().trim());
+        return st.nextToken();
+    }
+    static long readLong () throws IOException {
+        return Long.parseLong(next());
+    }
+    static int readInt () throws IOException {
+        return Integer.parseInt(next());
+    }
+    static double readDouble () throws IOException {
+        return Double.parseDouble(next());
+    }
+    static char readCharacter () throws IOException {
+        return next().charAt(0);
+    }  
+    static String readLine () throws IOException {
+        return br.readLine().trim();
+    }
+}
