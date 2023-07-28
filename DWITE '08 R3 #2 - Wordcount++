@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    for (int i = 0; i < 5; i++) {
+        string line;
+        getline(cin, line);
+        int wordCount = 0;
+        int letterCount = 0;
+        for (int i = 0; i < line.size(); i++) {
+            char c = line[i];
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                letterCount++;
+            }
+            if (!isalpha(c) || i == line.size() - 1){
+                if (letterCount > 3) {
+                    wordCount++;
+                }
+                letterCount = 0;
+            }
+        }
+
+        cout << wordCount << "\n";
+    }
+}
