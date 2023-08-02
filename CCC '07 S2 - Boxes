@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  // this problem can be solved brute force, the constraints r very small
+  // Remember items can be rotated 
+  int n; cin >> n;
+  vector<vector<int>> boxes(n, vector<int>(3));
+  for (int i = 0; i < n; i++) {
+    vector<int> box = {0, 0, 0};
+    cin >> box[0] >> box[1] >> box[2];
+
+    sort(box.begin(), box.end());
+
+    boxes[i] = box;
+  }
+
+  int m; cin >> m;
+
+  for (int i = 0; i < m; i++) {
+    vector<int> dimensions = {0, 0, 0};
+    cin >> dimensions[0] >> dimensions[1] >> dimensions[2];
+
+    sort(dimensions.begin(), dimensions.end());
+    int min = 2147483647;
+
+    
+
+    for (auto box : boxes) {
+      if (box[0] >= dimensions[0] && box[1] >= dimensions[1] && box[2] >= dimensions[2]) {
+        if (box[0]*box[1]*box[2] < min) {
+          min = box[0]*box[1]*box[2];
+        }
+      } 
+    }
+
+    if (min == 2147483647) {
+      cout << "Item does not fit." << "\n";
+    } else {
+      cout << min << "\n";
+    }
+  }
+  
+  return 0;
+
+  
+  
+}
