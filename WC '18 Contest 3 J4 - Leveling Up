@@ -1,0 +1,69 @@
+// author - inkay_liu
+
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+bool ascendingComparator(vector<int>& a, vector<int>& b) {
+    return a[0] < b[0];
+};
+
+bool descendingComparator(vector<int>& a, vector<int>& b) {
+    return a[0] > b[0];
+};
+int main()
+{
+
+    int n;
+    cin >> n;
+
+    int s; int l;
+    cin >> s >> l;
+
+    // first put them into vectors
+    // and then sort the vectors
+    vector<vector<int>> ahead;
+    vector<vector<int>> behind;
+
+    for (int i = 0; i < n; i++) {
+        int p; int m; int g;
+        cin >> p >> m >> g;
+        vector<int> pokemon = {p, m, g};
+        if (s <= p) {
+            ahead.push_back(pokemon);
+        } else {
+            behind.push_back(pokemon);
+        }
+    }
+
+    sort(ahead.begin(), ahead.end(), ascendingComparator);
+
+    sort(behind.begin(), behind.end(), descendingComparator);
+
+    queue<vector<int>> a; queue<vector<int>> b;
+
+    for (auto val : ahead) {
+        a.push(val);
+    }
+    for (auto val : behind) {
+        b.push(val);
+    }
+
+    while ((!a.empty() || !b.empty())) {
+        if (!a.empty() && a.front()[1] <= l) {
+            l += a.front()[2];
+            a.pop();
+        } else if (!b.empty() && b.front()[1] <= l) {
+            l += b.front()[2];
+            b.pop();
+        } else {
+          break;
+        }
+    }
+
+    cout << l << "\n";
+
+
+
+
+    return 0;
+}
