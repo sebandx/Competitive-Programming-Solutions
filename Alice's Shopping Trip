@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+
+int main()
+{
+    ll t, n;
+    cin >> t >> n;
+    vector<ll> pos;
+    vector<ll> neg;
+
+    for (ll i = 0; i < n; i++) {
+        ll val;
+        cin >> val;
+        if (0 <= val) {
+            pos.push_back(val);
+        } else {
+            neg.push_back(val);
+        }
+    }
+
+    sort(pos.begin(), pos.end());
+    sort(neg.begin(), neg.end(), greater<int>());
+
+    queue<ll> plus;
+    queue<ll> minus;
+
+    for (ll num : pos) {
+        plus.push(num);
+    }
+    for (ll num : neg) {
+        minus.push(num);
+    }
+
+    ll count = 0;
+    ll abs_sum = 0;
+    ll prev_pos = 0;
+    while (t > 0 && (!plus.empty() || !minus.empty())) {
+        int pos_val = plus.empty() ? INT_MAX : plus.front();
+        int neg_val = minus.empty() ? INT_MAX : minus.front();
+        int min_val;
+        if (pos_val > abs(neg_val)) {
+            min_val = neg_val;
+        } else {
+            min_val = pos_val;
+        }
+
+        if (t >= abs(prev_pos - min_val)) {
+            t -= abs(prev_pos - min_val);
+            if (pos_val <= abs(neg_val)) {
+                prev_pos = pos_val;
+                plus.pop();
+            } else {
+                prev_pos = neg_val;
+                minus.pop();
+            }
+            count++;
+        } else {
+            break;
+        }
+    }
+
+    cout << count << "\n";
+
+    return 0;
+}
