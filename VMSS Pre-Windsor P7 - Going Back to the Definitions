@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool compareTo(string a, string b) {
+  return (a + b) > (b + a);
+};
+int main() {
+  int n; cin >> n;
+  vector<string> nums(n);
+  for (int i = 0; i < n; i++) {
+    cin >> nums[i];
+  }
+
+  sort(nums.begin(), nums.end(), compareTo);
+
+  for (string val : nums) {
+    cout << val;
+  }
+  cout << "\n";
+  return 0;
+}
