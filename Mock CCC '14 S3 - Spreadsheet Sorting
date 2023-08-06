@@ -1,0 +1,13 @@
+def sort_by_column(spreadsheet, column):
+    spreadsheet.sort(key=lambda row: row[column])
+
+r, c = map(int, input().strip().split())
+spreadsheet = [[int(x) for x in input().strip().split()] for _ in range(r)]
+
+n = int(input().strip())
+for _ in range(n):
+    ci = int(input().strip())
+    sort_by_column(spreadsheet, ci - 1)
+
+for row in spreadsheet:
+    print(*row)
