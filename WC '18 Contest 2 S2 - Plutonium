@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+void bad() {
+  cout  << "-1\n"; exit(0);
+}
+
+int main() {
+  ios::sync_with_stdio(0); cin.tie(0);
+  int N; 
+  cin >> N;
+  
+  bool ob = false;
+  
+  vector<int> a(N + 1);
+  
+  for (int i = 1; i <= N; i++) { 
+    cin >> a[i];
+  }
+
+  int num;
+
+  // checks if vector is impossible
+  for (int i = N; i >= 1; i--) {
+    if (!a[i] && !ob) {
+      continue;
+    }
+    if (!ob) {
+      ob = true; 
+      num = a[i] - 1;
+    } else {
+      if (a[i] && a[i] != num) {
+        bad();
+      }
+      a[i] = num--;
+    }
+    if (ob && num == 0) {
+      ob = false;
+    }
+  }
+
+  if (a[1] > 1) bad();
+  a[1] = 1;
+  // otherwise max & min is just number of 1s (since if their is a 1 their must've been a withdrawl) and num1 + num0 because their could be a withdrawl every location where value = 0
+  // note the dat
+  int cnt0 = 0; int cnt1 = 0;
+  for (int i = 1; i <= N; i++) {
+    cnt0 += a[i] == 0;
+    cnt1 += a[i] == 1;
+  }
+
+  // the reason you subtract one for cnt1 
+  // is because you dont want to include the first element of the vector
+  // the reason is because their isnt a subtracton when u have a first element
+  cout << cnt1 - 1 << " " << cnt0 + cnt1 - 1 << "\n";
+}
