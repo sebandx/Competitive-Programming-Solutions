@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+    
+    unordered_map<int, vector<int>> eps;
+    vector<int> rating(n);
+    for (int i = 0; i < n; i++) {
+        cin >> rating[i];
+    }
+
+    for (auto i : rating) {
+        if (eps.find(i) == eps.end()) {
+            vector<int> psa(n, 0);
+            eps[i] = psa;
+        }
+    }
+
+    for (int i = 0; i < rating.size(); i++) {
+        eps[rating[i]][i] = 1;
+    }
+
+    for (auto& pair : eps) {
+        int key = pair.first;
+        vector<int>& value = pair.second;
+
+        for (int i = 1; i < value.size(); i++) {
+            value[i] += value[i - 1];
+        }
+    }
+
+    for (int i = 0; i < q; i++) {
+        int a, b;
+        cin >> a >> b;
+        a--; b--;  // Only decrement once here
+
+        int maxRating = INT_MIN;  // Use a better initialization value
+        int maxC = 0;
+        
+        for (auto& pair : eps) {
+            int key = pair.first;
+            vector<int>& value = pair.second;
+
+            int tMaxC = 0;
+            if (a == 0) {
+                tMaxC = value[value.size() - 1]  - value[b];
+            } else {
+                tMaxC = value[value.size() - 1] - value[b];
+                tMaxC += value[a - 1];
+            }
+            if (key > maxRating && tMaxC > 0) {
+                maxRating = key;
+                maxC = tMaxC;
+            }
+        }
+
+        cout << maxRating << " " << maxC << "\n";
+    }  
+}
