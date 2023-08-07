@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main() {
+  int n; int t; cin >> n >> t;
+  vector<int> cups(n);
+  for (int i = 0; i < t; i++) {
+    int a; int b; int c; cin >> a >> b >> c;
+    a--; b--;
+    if (b + 1 < cups.size()) {
+      cups[b + 1] -= c;
+      cups[a] += c;
+    } else {
+      cups[a] += c;
+    }
+  }
+
+  for (int i = 1; i < cups.size(); i++) {
+    cups[i] += cups[i - 1];
+  }
+
+  int l; cin >> l;
+  int start = 0; int end = 0;
+  int maxLen = 0;
+  int sum = cups[0];
+
+  while (end < cups.size()) {
+    if (start != end && end - start + 1 > maxLen) {
+      maxLen = end - start + 1;
+    }
+    if (sum + cups[end + 1] <= l) {
+      sum += cups[end + 1];
+      end++;
+      
+    } else {
+      sum -= cups[start];
+      start++;
+    }
+  }
+
+  cout << maxLen << "\n";
+}
