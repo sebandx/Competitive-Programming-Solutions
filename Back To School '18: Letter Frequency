@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main() {
+    string s; getline(cin, s); 
+
+    unordered_map<char, vector<int>> psa;
+
+    for (auto c : s) {
+        if (psa.find(c) == psa.end() && c != ' ') {
+            vector<int> vec(s.size(), 0);
+            psa[c] = vec;
+        }
+    }
+
+    for (int i = 0; i < s.size(); i++) {
+        if (psa.find(s[i]) != psa.end()) {
+            psa[s[i]][i]++;
+        }
+    }
+
+    for (auto& pair : psa) {
+        char key = pair.first;
+        vector<int>& value = pair.second;
+
+        for (int i = 1; i < value.size(); i++) {
+            value[i] += value[i - 1];
+        }
+    }
+
+    int q; cin >> q;
+
+    for (int k = 0; k < q; k++) {
+        int i; int j; char c;
+        cin >> i >> j >> c;
+        --i;  // convert 1-indexed i to 0-indexed
+        --j;  // convert 1-indexed j to 0-indexed
+
+        if (psa.find(c) == psa.end()) {  // if character c does not exist in the map, output 0
+            cout << 0 << "\n";
+            continue;
+        }
+
+        if (i == 0) {
+            cout << psa[c][j]  << "\n";
+        } else {
+            cout << psa[c][j] - psa[c][i - 1] << "\n";
+        }
+    }
+
+    return 0;
+}
