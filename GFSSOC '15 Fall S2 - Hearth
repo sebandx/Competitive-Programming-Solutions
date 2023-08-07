@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main() {
+  int n; int t; cin >> n >> t;
+  vector<tuple<string, int>> cards(n);
+  for (int i = 0; i < n; i++) {
+    string word; int mana; cin >> word >> mana;
+    cards[i] = make_tuple(word, mana);
+  }
+  vector<vector<string>> ans;
+  for (int i = 0; i < (1 << n); i++) {
+        vector<tuple<string, int>> subset;
+        
+        // Check each bit in i
+        for (int j = 0; j < n; j++) {
+            // If the jth bit of i is set, include set[j] in the subset
+            if (i & (1 << j)) {
+                subset.push_back(cards[j]);
+            }
+        }
+        
+        // If the subset has length 3, print it
+        if (subset.size() == 3) {
+          int cost = 0;
+            for (auto element : subset) {
+              cost += get<1>(element);
+            }
+
+          if (cost <= t) {
+            auto comparator = [](tuple<string, int>& a, const                  tuple<string, int>& b) {
+              return get<0>(a) < get<0>(b);
+            };
+
+            sort(subset.begin(), subset.end(), comparator);
+
+            vector<string> group(3);
+            for (int i = 0; i < 3; i++) {
+              group[i] = get<0>(subset[i]);
+              
+            }
+            ans.push_back(group);
+
+
+            
+
+          }
+        }
+    
+  }
+
+  sort(ans.begin(), ans.end());
+
+  for (auto an : ans) {
+    for (auto a : an) {
+      cout << a << " ";
+    }
+    cout << "\n";
+  }
+
+  
+}
