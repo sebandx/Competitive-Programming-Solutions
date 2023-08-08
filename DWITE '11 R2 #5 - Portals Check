@@ -1,0 +1,95 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+class Node {
+public:
+    string id;
+    int rank;
+    Node* parent;
+
+    Node(string id): id(id), rank(0), parent(this) {}
+};
+
+class DisjointSet {
+    std::unordered_map<string, Node*> nodes;
+
+public:
+    void makeSet(string id) {
+        if (nodes.find(id) == nodes.end()) {
+            nodes[id] = new Node(id);
+        }
+    }
+
+    Node* find(string id) {
+        Node* node = nodes[id];
+        if (node->parent != node) {
+            // Path compression
+            node->parent = find(node->parent->id);
+        }
+        return node->parent;
+    }
+
+    bool contains(string id) {
+      return nodes.find(id) != nodes.end();
+    }
+
+    void unionSets(string id1, string id2) {
+        Node* root1 = find(id1);
+        Node* root2 = find(id2);
+
+        if (root1 == root2) {
+            return;  
+        }
+
+        if (root1->rank < root2->rank) {
+            root1->parent = root2;
+        } else if (root1->rank > root2->rank) {
+            root2->parent = root1;
+        } else {
+            root2->parent = root1;
+            root1->rank++;
+        }
+    }
+
+    ~DisjointSet() {
+        for (auto& pair : nodes) {
+            delete pair.second;
+        }
+        nodes.clear();
+    }
+
+
+};
+
+int main() {
+  for (int i = 0; i < 5; i++) {
+    int n; cin >> n;
+    DisjointSet ds;
+    for (int i = 0; i < n; i++) {
+      char pq; string node1; string node2;
+      cin >> pq >> node1 >> node2;
+      if (pq == 'p') {
+        if (!ds.contains(node1)) {
+          ds.makeSet(node1);
+        } 
+        if (!ds.contains(node2)) {
+          ds.makeSet(node2);
+        }    
+        ds.unionSets(node1, node2);
+      } else {
+        if (node1 == node2) {
+          cout << "connected\n";
+        } else if (!ds.contains(node1) || !ds.contains(node2)) {
+          cout << "not connected\n";
+        }
+        else if (ds.find(node1) == ds.find(node2)) {
+          cout << "connected\n";
+        } else {
+          cout << "not connected\n";
+        }
+      }
+      
+    }
+  }
+}
