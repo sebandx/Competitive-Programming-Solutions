@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main() {
+    ll n; ll b; ll c; cin >> n >> b >> c;
+
+    vector<ll> stops(b, 0);
+    for (ll i = 0;i < n; i++) {
+        ll s; ll e; cin >> s >> e;
+        s--; e--;
+        stops[s] += 1;
+        if (e < stops.size()) {
+            stops[e] -= 1;
+        }
+    }
+
+
+
+    for (ll i = 1; i < stops.size(); i++) {
+        stops[i] += stops[i - 1];
+    }
+
+
+
+    ll time = 0;
+
+    for (auto val : stops) {
+        if (val < c) {
+            time += val;
+        } else {
+            time += c;
+            time += (val - c) * 5;
+        }
+    }
+
+    cout << time << "\n";
+
+
+
+}
