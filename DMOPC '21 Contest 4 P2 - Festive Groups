@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int n; cin >> n;
+    // remember u dont need to remove duplicates
+    vector<int> val(n);
+    for (int i = 0; i < n; i++) {
+        cin >> val[i];
+    }
+
+    sort(val.begin(), val.end());
+
+    // your indexing the bool vector with the values (the "jolliness" instead of just their positions
+    vector<bool> bol(val.back() + 1, false);
+    int c = 0;
+    for (int x : val) {
+        if (bol[x]) continue;
+        c++;
+        for (int i = x; i <= val.back(); i+= x) {
+            bol[i] = true;
+        }
+    }
+
+    cout << c << "\n";
+    return 0;
+}
