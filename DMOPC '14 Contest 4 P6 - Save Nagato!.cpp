@@ -53,11 +53,5 @@ int main() {
         int radius = max(dx[i], dy[i]);
         cout << radius + 1 << "\n";
     }
-
-
-
-
-
-
     return 0;
 }
