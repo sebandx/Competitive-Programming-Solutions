@@ -33,7 +33,7 @@ int main() {
     for (int i = 1; i <= n; i++) {
         distance[i] = -1;
     }
-    
+
     distance[maxDNode] = 0;
     dfs(graph, maxDNode, distance);
     maxD = INT_MIN;
