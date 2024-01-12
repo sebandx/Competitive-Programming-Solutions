@@ -32,7 +32,4 @@ public class AMathContestP2SubsequenceSum {
 	    
 	    return sum.multiply(subsetsCount);
 	}
-
-
-
 }
